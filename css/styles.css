@@ -1,0 +1,38 @@
+
+	body {
+		color: #000;
+		
+		font-family: 'Open Sans', sans-serif;
+		font-size: 13px;
+		line-height: 16px;
+		overflow: hidden;
+	}
+	#viewport {
+		-webkit-perspective: 300; 
+		-moz-perspective: 400; 
+		-o-perspective: 400; 
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		overflow: hidden;
+		
+	}
+
+	#rotateDiv{
+		
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -106px;
+		margin-top: -106px;
+		height: 212px;
+		width: 212px;
+		
+		-webkit-transform-style: preserve-3d;
+		-moz-transform-style: preserve-3d;
+		-o-transform-style: preserve-3d;
+	}
+	
+	
