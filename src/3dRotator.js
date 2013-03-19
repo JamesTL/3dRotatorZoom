@@ -2,16 +2,19 @@ var rotateMe = (function($) {
 
 
 	var d = 0,
-		world, 
-		viewport, 
+		world,
+		viewport,
 		thisRotateXAngle = 0,
 		thisRotateYAngle = 0;
 
 
 
-	//deault values
+	//default values
 	var config = {
-		containerDiv: 'rotateDiv'
+		//the container
+		containerDiv: 'rotateDivOriginal',
+		//the rotation amount 
+		rotateDegree: 180
 
 	}
 
@@ -22,27 +25,28 @@ var rotateMe = (function($) {
 
 	var init = function(passedConfig) {
 
-			console.log(passedConfig.containerDiv);
+
+		/* merge passedConfig to orginal config file -config will now use passedConfig values if present Sin this array passed at init*/
+		$.extend(config, passedConfig);
 
 
-			viewport = document.getElementById('viewport');
+		//console.log(passedConfig.containerDiv);
+	    viewport = document.getElementById('viewport');
+        world = document.getElementById(passedConfig.containerDiv);
 
-			world = document.getElementById('rotateDiv');
-
-			
-		} 
+}
 
 	/***************************************/
 	/***************************************/
 
 
-		window.addEventListener('mousewheel', function(event) {
+	window.addEventListener('mousewheel', function(event) {
 
-			event = event ? event : window.event;
-			d = d - (event.detail ? event.detail * -5 : event.wheelDelta / 8);
-			update();
+		event = event ? event : window.event;
+		d = d - (event.detail ? event.detail * -5 : event.wheelDelta / 8);
+		update();
 
-		});
+	});
 
 	/***************************************/
 	/***************************************/
@@ -53,7 +57,7 @@ var rotateMe = (function($) {
 		d = d - (event.detail ? event.detail * -5 : event.wheelDelta / 8);
 		update();
 
-	}); 
+	});
 
 	/***************************************/
 	/***************************************/
@@ -63,8 +67,8 @@ var rotateMe = (function($) {
 
 	{
 
-		thisRotateYAngle = -(.5 - (e.clientX / window.innerWidth)) * 180;
-		thisRotateXAngle = (.5 - (e.clientY / window.innerHeight)) * 180
+		thisRotateYAngle = -(.5 - (e.clientX / window.innerWidth)) * config.rotateDegree;
+		thisRotateXAngle = (.5 - (e.clientY / window.innerHeight)) * config.rotateDegree;
 		update();
 	});
 
@@ -75,22 +79,22 @@ var rotateMe = (function($) {
 	var update = function() {
 
 		var t = 'translateZ( ' + d + 'px ) rotateX( ' + thisRotateXAngle + 'deg) rotateY( ' + thisRotateYAngle + 'deg)';
-			world.style.webkitTransform = t;
-			world.style.MozTransform = t;
-			world.style.oTransform = t;
-		}
+		world.style.webkitTransform = t;
+		world.style.MozTransform = t;
+		world.style.oTransform = t;
+	}
 
 
 	return {
 
 		init: init
-	} 
+	}
 
 	/***************************************/
 	/***************************************/
 
 })(jQuery);
 
-rotateMe.init({
-	containerDiv: 'rotateDiv'
-});
+rotateMe.init({containerDiv: 'rotateDiv',rotateDegree: 360});
+
+
